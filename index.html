@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autorización · Viaje de Graduación a Cartagena · Promo Lucentia 2027</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2433;
+    --muted: #5b6475;
+    --line: #dfe3ea;
+    --bg: #f5f3ef;
+    --card: #ffffff;
+    --accent: #0f4c5c;
+    --accent-soft: #e6f0f2;
+    --warn-bg: #fff4e5;
+    --warn-ink: #8a4b00;
+    --err-bg: #fdecec;
+    --err-ink: #9b1c1c;
+    --ok-bg: #e9f6ee;
+    --ok-ink: #1f6b3a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 24px 16px 64px; }
+  header { text-align: center; padding: 16px 0 24px; }
+  .eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 28px; line-height: 1.2; margin: 8px 0 6px; }
+  .sub { color: var(--muted); margin: 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; margin-bottom: 16px; }
+  h2 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; font-weight: 600; }
+  .letter p { margin: 0 0 12px; }
+  .letter p:last-child { margin-bottom: 0; }
+  .figures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 16px 0 4px; }
+  .fig { background: var(--accent-soft); border-radius: 10px; padding: 12px; text-align: center; }
+  .fig b { display: block; font-size: 20px; color: var(--accent); }
+  .fig span { font-size: 12.5px; color: var(--muted); }
+  label.field { display: block; font-weight: 600; margin: 0 0 8px; }
+  select, input[type=text] { width: 100%; font: inherit; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); }
+  select:focus, input[type=text]:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .opts { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { flex: 1 1 0; min-width: 96px; }
+  .pill input { position: absolute; opacity: 0; pointer-events: none; }
+  .pill span { display: block; text-align: center; padding: 12px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; font-weight: 500; }
+  .pill input:checked + span { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .pill input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .gap { height: 18px; }
+  .check { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--line); cursor: pointer; }
+  .check:first-of-type { border-top: 0; padding-top: 0; }
+  .check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); flex: none; }
+  .check b { display: block; }
+  .note { font-size: 14px; color: var(--muted); margin: 10px 0 0; }
+  .alert { border-radius: 10px; padding: 12px 14px; margin-top: 12px; font-size: 15px; }
+  .alert.warn { background: var(--warn-bg); color: var(--warn-ink); }
+  .alert.err { background: var(--err-bg); color: var(--err-ink); }
+  .pad-box { border: 1px dashed #b9c1cd; border-radius: 10px; background: #fcfcfd; position: relative; touch-action: none; }
+  canvas { display: block; width: 100%; height: 180px; border-radius: 10px; cursor: crosshair; }
+  .pad-hint { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; color: #a3abb8; pointer-events: none; font-size: 14px; }
+  .pad-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 14px; color: var(--muted); }
+  button { font: inherit; cursor: pointer; }
+  .link-btn { background: none; border: 0; color: var(--accent); font-weight: 600; padding: 4px 0; }
+  .submit { width: 100%; padding: 15px; border: 0; border-radius: 12px; background: var(--accent); color: #fff; font-weight: 600; font-size: 17px; }
+  .submit:disabled { background: #9fb3b9; cursor: not-allowed; }
+  .hidden { display: none !important; }
+  .done { text-align: center; padding: 36px 22px; }
+  .done .mark { width: 56px; height: 56px; border-radius: 50%; background: var(--ok-bg); color: var(--ok-ink); display: grid; place-items: center; margin: 0 auto 14px; font-size: 28px; }
+  .done h2 { font-family: Fraunces, Georgia, serif; text-transform: none; letter-spacing: 0; font-size: 24px; color: var(--ink); }
+  a { color: var(--accent); }
+  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 24px; }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  fieldset[disabled] { opacity: .45; }
+  legend { padding: 0; }
+  @media (max-width: 480px) { h1 { font-size: 24px; } .figures { grid-template-columns: 1fr; } .card { padding: 18px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Promo Lucentia 2027 · St. George</div>
+    <h1>Autorización del viaje de graduación a Cartagena</h1>
+    <p class="sub">Plazo para firmar: domingo 8 de noviembre de 2026</p>
+  </header>
+
+  <div id="loadError" class="card hidden"><div class="alert err" style="margin:0">No pudimos cargar el formulario. Revise su conexión y vuelva a abrir el enlace. Si el problema sigue, avise a su mamá delegada.</div></div>
+
+  <form id="form" novalidate>
+    <section class="card letter">
+      <h2>Estimada familia</h2>
+      <p>Tras el proceso de votación, el 90% de los estudiantes de la Promo Lucentia 2027 eligió <b>Cartagena</b> como destino de su viaje de graduación, previsto para <b>junio de 2027</b> con la agencia <b>Verité</b>.</p>
+      <div class="figures">
+        <div class="fig"><b>USD 2,498</b><span>costo por estudiante</span></div>
+        <div class="fig"><b>USD 2,161</b><span>fondo acumulado por estudiante</span></div>
+        <div class="fig"><b>USD 337</b><span>diferencia por cubrir</span></div>
+      </div>
+      <p>Confiamos en cubrir esa diferencia con el esfuerzo de todos en la rifa y el bingo.</p>
+      <p>Para reservar los cupos, el comité abonará a Verité el <b>50% del costo del viaje</b>. Este abono <b>no es reembolsable</b>. Por eso necesitamos su autorización firmada antes de realizarlo.</p>
+      <p id="veriteLink" class="hidden">Vea la <a href="#" target="_blank" rel="noopener">presentación completa de Verité</a>, con el itinerario día a día.</p>
+      <p>Con cariño,<br>Comité Directivo · Promo Lucentia 2027</p>
+    </section>
+
+    <section class="card">
+      <h2>1 · Estudiante</h2>
+      <label class="field" for="estudiante">Nombre completo del estudiante</label>
+      <select id="estudiante" required>
+        <option value="">Cargando lista…</option>
+      </select>
+      <div id="dupAlert" class="alert warn hidden">Ya un representante firmó la autorización de este estudiante. Si cree que es un error, contacte a su mamá delegada.</div>
+    </section>
+
+    <fieldset id="resto" disabled>
+      <section class="card">
+        <h2>2 · Quién llena el formulario</h2>
+        <div class="opts" role="radiogroup" aria-label="Quién llena el formulario">
+          <label class="pill"><input type="radio" name="quien" value="Madre"><span>Madre</span></label>
+          <label class="pill"><input type="radio" name="quien" value="Padre"><span>Padre</span></label>
+          <label class="pill"><input type="radio" name="quien" value="Otro"><span>Otro</span></label>
+        </div>
+        <div id="otroBox" class="hidden">
+          <div class="gap"></div>
+          <label class="field" for="nombreOtro">Nombre completo de quien firma</label>
+          <input type="text" id="nombreOtro" autocomplete="name" maxlength="120">
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3 · ¿Autoriza a su hijo(a) a viajar a Cartagena?</h2>
+        <div class="opts" role="radiogroup" aria-label="Decisión">
+          <label class="pill"><input type="radio" name="autoriza" value="si"><span>Sí, autorizo</span></label>
+          <label class="pill"><input type="radio" name="autoriza" value="no"><span>No autorizo</span></label>
+        </div>
+      </section>
+
+      <section class="card" id="condCard">
+        <h2>4 · Condiciones del viaje</h2>
+        <label class="check"><input type="checkbox" class="cond"><span><b>Viaje exclusivo para estudiantes.</b> El viaje está diseñado solo para la promoción, con un adulto del staff de Verité por cada seis estudiantes. Padres y familiares no viajan a través de la agencia, ni participan en las excursiones y/o actividades diseñadas para los jóvenes.</span></label>
+        <label class="check"><input type="checkbox" class="cond"><span><b>Abono no reembolsable.</b> El comité abonará a Verité el 50% del costo del viaje; ese abono no se devuelve si el estudiante desiste.</span></label>
+        <label class="check"><input type="checkbox" class="cond"><span><b>Diferencia por recaudación.</b> La diferencia de USD 337 se cubrirá con la rifa y el bingo. La familia se compromete a apoyar esas actividades y, en caso de ser necesario, a cubrir esa diferencia por su hijo(a).</span></label>
+        <label class="check"><input type="checkbox" class="cond"><span><b>Documentos de viaje.</b> La familia gestiona el pasaporte vigente y el permiso de salida de menor.</span></label>
+        <label class="check"><input type="checkbox" class="cond"><span><b>Código de conducta.</b> El estudiante y la familia aceptan el código de conducta y las normas de permisos que presente Verité.</span></label>
+      </section>
+
+      <section class="card">
+        <h2>5 · Firma</h2>
+        <div class="pad-box">
+          <canvas id="pad" aria-label="Recuadro para firmar"></canvas>
+          <div id="padHint" class="pad-hint">Firme aquí con el dedo o el mouse</div>
+        </div>
+        <div class="pad-actions">
+          <span>La fecha y la hora se registran al enviar.</span>
+          <button type="button" class="link-btn" id="clearPad">Borrar firma</button>
+        </div>
+      </section>
+
+      <div id="formError" class="alert err hidden" role="alert"></div>
+      <div class="gap"></div>
+      <button type="submit" class="submit" id="submitBtn">Firmar y enviar</button>
+    </fieldset>
+  </form>
+
+  <section id="done" class="card done hidden" aria-live="polite">
+    <div class="mark">✓</div>
+    <h2>Autorización recibida</h2>
+    <p id="doneText"></p>
+    <p class="note">Puede cerrar esta página. Gracias por su apoyo.</p>
+  </section>
+
+  <footer>Comité Directivo · Promo Lucentia 2027</footer>
+</div>
+
+<script>
+(() => {
+  const SUPABASE_URL = 'https://kbigmysrwsyiwvqcszox.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_TtsYUBwVaVkQ1_e9pxx-hw_MD-_NUsC';
+  const VERITE_URL = ''; // Pegue aquí el enlace de la presentación de Verité
+
+  const $ = (id) => document.getElementById(id);
+  const rpc = async (fn, body) => {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY },
+      body: JSON.stringify(body || {}),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  };
+
+  if (VERITE_URL) {
+    const p = $('veriteLink');
+    p.querySelector('a').href = VERITE_URL;
+    p.classList.remove('hidden');
+  }
+
+  const sel = $('estudiante');
+  const resto = $('resto');
+  const dupAlert = $('dupAlert');
+  const formError = $('formError');
+
+  const showError = (msg) => { formError.textContent = msg; formError.classList.remove('hidden'); formError.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  const hideError = () => formError.classList.add('hidden');
+
+  // Estudiantes
+  rpc('listar_estudiantes').then((rows) => {
+    sel.innerHTML = '<option value="">Seleccione el nombre…</option>' +
+      rows.map((r) => `<option value="${r.id}">${r.nombre.replace(/[<>&"]/g, '')}</option>`).join('');
+  }).catch(() => { $('loadError').classList.remove('hidden'); $('form').classList.add('hidden'); });
+
+  let checkSeq = 0;
+  sel.addEventListener('change', async () => {
+    hideError();
+    dupAlert.classList.add('hidden');
+    resto.disabled = true;
+    if (!sel.value) return;
+    const seq = ++checkSeq;
+    try {
+      const ya = await rpc('estudiante_ya_firmo', { p_estudiante_id: Number(sel.value) });
+      if (seq !== checkSeq) return;
+      if (ya) { dupAlert.classList.remove('hidden'); return; }
+      resto.disabled = false;
+      setTimeout(sizePad, 0);
+    } catch { showError('No pudimos verificar al estudiante. Intente de nuevo.'); }
+  });
+
+  // Quién llena
+  document.querySelectorAll('input[name=quien]').forEach((r) => r.addEventListener('change', () => {
+    const otro = document.querySelector('input[name=quien]:checked')?.value === 'Otro';
+    $('otroBox').classList.toggle('hidden', !otro);
+    if (otro) $('nombreOtro').focus();
+  }));
+
+  // Autoriza: las condiciones solo aplican si autoriza
+  document.querySelectorAll('input[name=autoriza]').forEach((r) => r.addEventListener('change', () => {
+    const no = document.querySelector('input[name=autoriza]:checked')?.value === 'no';
+    $('condCard').classList.toggle('hidden', no);
+  }));
+
+  // Firma
+  const canvas = $('pad');
+  const ctx = canvas.getContext('2d');
+  let drawing = false, hasInk = false, last = null;
+  function sizePad() {
+    const r = canvas.getBoundingClientRect();
+    if (!r.width) return;
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    const keep = hasInk ? canvas.toDataURL() : null;
+    canvas.width = Math.round(r.width * dpr);
+    canvas.height = Math.round(r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.lineWidth = 2.4; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#111827';
+    if (keep) { const img = new Image(); img.onload = () => ctx.drawImage(img, 0, 0, r.width, r.height); img.src = keep; }
+  }
+  window.addEventListener('resize', sizePad);
+  sizePad();
+  const pos = (e) => { const r = canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  canvas.addEventListener('pointerdown', (e) => { if (resto.disabled) return; drawing = true; last = pos(e); canvas.setPointerCapture(e.pointerId); ctx.beginPath(); ctx.arc(last.x, last.y, 1.1, 0, Math.PI * 2); ctx.fillStyle = '#111827'; ctx.fill(); hasInk = true; $('padHint').classList.add('hidden'); });
+  canvas.addEventListener('pointermove', (e) => { if (!drawing) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p; });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach((t) => canvas.addEventListener(t, () => { drawing = false; }));
+  $('clearPad').addEventListener('click', () => { ctx.clearRect(0, 0, canvas.width, canvas.height); hasInk = false; $('padHint').classList.remove('hidden'); });
+
+  const firmaPng = () => {
+    // Exporta en blanco y tamaño fijo para que el archivo sea liviano
+    const out = document.createElement('canvas');
+    out.width = 600; out.height = 200;
+    const o = out.getContext('2d');
+    o.fillStyle = '#fff'; o.fillRect(0, 0, 600, 200);
+    o.drawImage(canvas, 0, 0, 600, 200);
+    return out.toDataURL('image/png');
+  };
+
+  // Envío
+  $('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideError();
+    const quien = document.querySelector('input[name=quien]:checked')?.value;
+    const autoriza = document.querySelector('input[name=autoriza]:checked')?.value;
+    const nombreOtro = $('nombreOtro').value.trim();
+    const conds = [...document.querySelectorAll('.cond')];
+    if (!sel.value) return showError('Seleccione el nombre del estudiante.');
+    if (!quien) return showError('Indique quién llena el formulario.');
+    if (quien === 'Otro' && nombreOtro.length < 3) return showError('Escriba el nombre completo de quien firma.');
+    if (!autoriza) return showError('Indique si autoriza el viaje.');
+    if (autoriza === 'si' && !conds.every((c) => c.checked)) return showError('Para autorizar, marque las cinco condiciones del viaje.');
+    if (!hasInk) return showError('Firme en el recuadro antes de enviar.');
+
+    const btn = $('submitBtn');
+    btn.disabled = true; btn.textContent = 'Enviando…';
+    try {
+      const r = await rpc('registrar_autorizacion', {
+        p_estudiante_id: Number(sel.value),
+        p_quien_llena: quien,
+        p_nombre_firmante: quien === 'Otro' ? nombreOtro : null,
+        p_autoriza: autoriza === 'si',
+        p_acepta_condiciones: autoriza === 'si',
+        p_firma_png: firmaPng(),
+      });
+      if (r.ok) {
+        const f = new Intl.DateTimeFormat('es-DO', { timeZone: 'America/Santo_Domingo', dateStyle: 'long', timeStyle: 'short' }).format(new Date(r.firmado_en));
+        const nombre = sel.options[sel.selectedIndex].text;
+        $('doneText').textContent = `Registramos la ${autoriza === 'si' ? 'autorización' : 'respuesta'} para ${nombre} el ${f}.`;
+        $('form').classList.add('hidden');
+        $('done').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (r.codigo === 'duplicado') { resto.disabled = true; dupAlert.classList.remove('hidden'); dupAlert.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      else showError('Faltan datos por completar. Revise el formulario.');
+    } catch {
+      showError('No pudimos enviar la autorización. Revise su conexión e intente de nuevo.');
+    }
+    btn.disabled = false; btn.textContent = 'Firmar y enviar';
+  });
+})();
+</script>
+</body>
+</html>
